@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\URLStatus.Application\URLStatus.Application.csproj" />
+    <ProjectReference Include="..\URLStatus.Domain\URLStatus.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
