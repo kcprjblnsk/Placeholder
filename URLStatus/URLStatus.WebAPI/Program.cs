@@ -1,4 +1,5 @@
 using Serilog;
+using URLStatus.Application.Logic.Abstractions;
 using URLStatus.Infrastructure.Persistence;
 
 namespace URLStatus.WebAPI
@@ -33,6 +34,11 @@ namespace URLStatus.WebAPI
             // Add services to the container.
             builder.Services.AddSqlDatabase(builder.Configuration.GetConnectionString("MainDbSql")!);
             builder.Services.AddControllers();
+
+            builder.Services.AddMediatR(c =>
+            {
+                c.RegisterServicesFromAssemblyContaining(typeof(BaseCommandHandler));
+            });
 
             var app = builder.Build();
 
