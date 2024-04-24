@@ -1,4 +1,5 @@
 using Serilog;
+using URLStatus.Application;
 using URLStatus.Application.Logic.Abstractions;
 using URLStatus.Infrastructure.Persistence;
 using URLStatus.WebAPI.Middlewares;
@@ -40,6 +41,8 @@ namespace URLStatus.WebAPI
             {
                 c.RegisterServicesFromAssemblyContaining(typeof(BaseCommandHandler));
             });
+
+            builder.Services.AddApplicationCollection();
 
             var app = builder.Build();
 

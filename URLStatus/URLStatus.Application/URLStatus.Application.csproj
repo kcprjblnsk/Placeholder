@@ -15,8 +15,4 @@
     <ProjectReference Include="..\URLStatus.Domain\URLStatus.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
