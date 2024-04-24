@@ -1,6 +1,7 @@
 using Serilog;
 using URLStatus.Application;
 using URLStatus.Application.Logic.Abstractions;
+using URLStatus.Infrastructure.Auth;
 using URLStatus.Infrastructure.Persistence;
 using URLStatus.WebAPI.Middlewares;
 
@@ -37,7 +38,7 @@ namespace URLStatus.WebAPI
             builder.Services.AddSqlDatabase(builder.Configuration.GetConnectionString("MainDbSql")!);
             builder.Services.AddControllers();
             builder.Services.AddDatabaseCache();
-
+            builder.Services.AddJwtAuth(builder.Configuration);
 
             builder.Services.AddMediatR(c =>
             {

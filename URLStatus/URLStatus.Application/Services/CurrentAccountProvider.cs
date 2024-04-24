@@ -31,7 +31,9 @@ namespace URLStatus.Application.Services
                 throw new UnauthorizedException();
             }
 
-            var account = await _applicationDbContext.Accounts.Cacheable().FirstOrDefaultAsync(a => a.Id == accountId.Value);
+            var account = await _applicationDbContext.Accounts
+                .Cacheable()
+                .FirstOrDefaultAsync(a => a.Id == accountId.Value);
             if (account == null)
             {
                 throw new ErrorException("AccountDoesNotExist");
