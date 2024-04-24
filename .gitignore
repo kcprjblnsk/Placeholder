@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/URLStatus/URLStatus.WebAPI/appsettings.Development.local.json
