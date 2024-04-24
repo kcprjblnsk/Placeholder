@@ -1,6 +1,7 @@
 using Serilog;
 using URLStatus.Application.Logic.Abstractions;
 using URLStatus.Infrastructure.Persistence;
+using URLStatus.WebAPI.Middlewares;
 
 namespace URLStatus.WebAPI
 {
@@ -41,6 +42,8 @@ namespace URLStatus.WebAPI
             });
 
             var app = builder.Build();
+
+            app.UseExceptionResultMiddleware(); //exception so it has to be higher than methods below
 
             // Configure the HTTP request pipeline.
 
