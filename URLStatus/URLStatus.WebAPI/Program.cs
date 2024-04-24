@@ -36,6 +36,8 @@ namespace URLStatus.WebAPI
             // Add services to the container.
             builder.Services.AddSqlDatabase(builder.Configuration.GetConnectionString("MainDbSql")!);
             builder.Services.AddControllers();
+            builder.Services.AddDatabaseCache();
+
 
             builder.Services.AddMediatR(c =>
             {

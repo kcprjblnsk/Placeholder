@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EFCoreSecondLevelCacheInterceptor;
 using Microsoft.EntityFrameworkCore;
 using URLStatus.Application.Exceptions;
 using URLStatus.Application.Interfaces;
@@ -30,7 +31,7 @@ namespace URLStatus.Application.Services
                 throw new UnauthorizedException();
             }
 
-            var account = await _applicationDbContext.Accounts.FirstOrDefaultAsync(a => a.Id == accountId.Value);
+            var account = await _applicationDbContext.Accounts.Cacheable().FirstOrDefaultAsync(a => a.Id == accountId.Value);
             if (account == null)
             {
                 throw new ErrorException("AccountDoesNotExist");
@@ -47,6 +48,7 @@ namespace URLStatus.Application.Services
                     .Where(au => au.UserId == userId.Value)
                     .OrderBy(au => au.Id) //needs to be sorted !!!!! possible 2 query 2 different outputs
                     .Select(au => (int?)au.UserId)
+                    .Cacheable()
                     .FirstOrDefaultAsync();
             }
             return null;
