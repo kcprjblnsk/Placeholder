@@ -1,4 +1,5 @@
 using Serilog;
+using URLStatus.Infrastructure.Persistence;
 
 namespace URLStatus.WebAPI
 {
@@ -25,7 +26,7 @@ namespace URLStatus.WebAPI
                     .Enrich.FromLogContext());
 
             // Add services to the container.
-
+            builder.Services.AddSqlDatabase(builder.Configuration.GetConnectionString("MainDbSql")!);
             builder.Services.AddControllers();
 
             var app = builder.Build();
