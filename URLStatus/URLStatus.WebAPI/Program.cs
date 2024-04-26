@@ -42,7 +42,7 @@ namespace URLStatus.WebAPI
             builder.Services.AddJwtAuth(builder.Configuration);
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddJwtAuthenticationDataProvider(builder.Configuration);
-            
+            builder.Services.AddPasswordManager();
 
 
             builder.Services.AddMediatR(c =>
