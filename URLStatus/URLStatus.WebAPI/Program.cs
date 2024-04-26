@@ -3,6 +3,7 @@ using URLStatus.Application;
 using URLStatus.Application.Logic.Abstractions;
 using URLStatus.Infrastructure.Auth;
 using URLStatus.Infrastructure.Persistence;
+using URLStatus.WebAPI.Application.Auth;
 using URLStatus.WebAPI.Middlewares;
 
 namespace URLStatus.WebAPI
@@ -39,6 +40,10 @@ namespace URLStatus.WebAPI
             builder.Services.AddControllers();
             builder.Services.AddDatabaseCache();
             builder.Services.AddJwtAuth(builder.Configuration);
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddJwtAuthenticationDataProvider(builder.Configuration);
+            
+
 
             builder.Services.AddMediatR(c =>
             {
