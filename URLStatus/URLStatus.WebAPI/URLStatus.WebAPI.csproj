@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Application\Response\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Middlewares\" />
   </ItemGroup>
 
