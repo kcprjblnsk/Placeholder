@@ -52,7 +52,31 @@ namespace URLStatus.WebAPI
 
             builder.Services.AddApplicationCollection();
 
+            builder.Services.AddSwaggerGen(o =>
+            {
+                o.CustomSchemaIds(x =>
+                {
+                    var name = x.FullName;
+                    if (name != null)
+                    {
+                        name = name.Replace("+", "_"); //swagger fixbug cant work with +
+                    }
+
+                    return name;
+                });
+            });
+
+
+
             var app = builder.Build();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+
+            }
+
 
             app.UseExceptionResultMiddleware(); //exception so it has to be higher than methods below
 
@@ -67,3 +91,9 @@ namespace URLStatus.WebAPI
         }
     }
 }
+
+
+
+
+
+//https://github.com/dotnet/sqlclient/issues/2239 account error fix 

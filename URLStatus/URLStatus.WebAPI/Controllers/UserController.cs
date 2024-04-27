@@ -11,13 +11,13 @@ namespace URLStatus.WebAPI.Controllers
 
     public class UserController : BaseController
     {
-        public UserController(ILogger logger, IMediator mediator) : base(logger, mediator)
+        public UserController(ILogger<UserController> logger, IMediator mediator) : base(logger, mediator) //needed generic fixed
         {
 
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateUserWithAccount([FromBody] CreateUser.Request model)
+        public async Task<ActionResult> CreateUserWithAccount([FromBody] CreateUserWithAccount.Request model)
         {
             var createAccountResult = await _mediator.Send(model);
             return Ok(createAccountResult);

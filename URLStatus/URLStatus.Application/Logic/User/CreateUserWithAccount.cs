@@ -12,7 +12,7 @@ using URLStatus.Domain.Entities;
 
 namespace URLStatus.Application.Logic.User
 {
-    public static class CreateUser
+    public static class CreateUserWithAccount
     {
         public class Request : IRequest<Result>
         {
@@ -37,13 +37,13 @@ namespace URLStatus.Application.Logic.User
             public async Task<Result> Handle(Request request, CancellationToken cancellationToken)
             {
                 var userExists = await _applicationDbContext.Users.AnyAsync(u => u.Email == request.Email);
+                
+                if (userExists)
                 {
-                    if (userExists)
-                    {
-                        throw new ErrorException("AccountWithThisEmailExists");
-                    }
-
+                    throw new ErrorException("AccountWithThisEmailExists");
                 }
+
+                
                 var utcNow = DateTime.UtcNow;
                 var user = new Domain.Entities.User()
                 {
