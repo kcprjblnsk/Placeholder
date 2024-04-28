@@ -43,7 +43,7 @@ namespace URLStatus.WebAPI
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddJwtAuthenticationDataProvider(builder.Configuration);
             builder.Services.AddPasswordManager();
-
+            
 
             builder.Services.AddMediatR(c =>
             {
@@ -51,6 +51,8 @@ namespace URLStatus.WebAPI
             });
 
             builder.Services.AddApplicationCollection();
+            
+            builder.Services.AddValidators();
 
             builder.Services.AddSwaggerGen(o =>
             {

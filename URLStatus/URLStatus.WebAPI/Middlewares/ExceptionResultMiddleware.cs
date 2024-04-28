@@ -22,7 +22,13 @@ namespace URLStatus.WebAPI.Middlewares
             catch (ErrorException e)
             {
                 httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                await httpContext.Response.WriteAsJsonAsync(new ErrorResponse { Error = e.Error }); //serializing to json as exception
+                await httpContext.Response.WriteAsJsonAsync(new ErrorResponse
+                    { Error = e.Error }); //serializing to json as exception
+            }
+            catch (ValidationException ve)
+            {
+                httpContext.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
+                await httpContext.Response.WriteAsJsonAsync(new ValidationErrorResponse(ve));
             }
             catch (UnauthorizedException ue)
             {
