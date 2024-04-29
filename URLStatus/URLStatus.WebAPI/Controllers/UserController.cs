@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
@@ -46,6 +47,14 @@ namespace URLStatus.WebAPI.Controllers
             return Ok(new JwtToken() { AccessToken = token });
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Logout([FromBody] LogoutFromAccount.Request model)
+        {
+            var logoutResult = await _mediator.Send(model);
+            DeleteCookie();
+            return Ok(logoutResult);
+        }
+
         private void SetTokenCookie(string token)
         {
             var cookieOption = new CookieOptions()
@@ -67,6 +76,14 @@ namespace URLStatus.WebAPI.Controllers
                 };
             }
 
+        }
+
+        private void DeleteCookie()
+        {
+            Response.Cookies.Delete(CookieSettings.CookieName, new CookieOptions()
+            {
+                HttpOnly = true,
+            });
         }
     }
 }
