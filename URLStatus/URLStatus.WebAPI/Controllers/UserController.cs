@@ -62,6 +62,7 @@ namespace URLStatus.WebAPI.Controllers
             return Ok(data);
         }
 
+
         private void SetTokenCookie(string token)
         {
             var cookieOption = new CookieOptions()

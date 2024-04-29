@@ -49,7 +49,7 @@ namespace URLStatus.Application.Services
                 return await _applicationDbContext.AccountUsers
                     .Where(au => au.UserId == userId.Value)
                     .OrderBy(au => au.Id) //needs to be sorted !!!!! possible 2 query 2 different outputs
-                    .Select(au => (int?)au.UserId)
+                    .Select(au => (int?)au.AccountId) // fixed
                     .Cacheable()
                     .FirstOrDefaultAsync();
             }
