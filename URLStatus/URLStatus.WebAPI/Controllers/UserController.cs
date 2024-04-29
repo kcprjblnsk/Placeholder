@@ -48,11 +48,18 @@ namespace URLStatus.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Logout([FromBody] LogoutFromAccount.Request model)
+        public async Task<ActionResult> Logout()
         {
-            var logoutResult = await _mediator.Send(model);
+            var logoutResult = await _mediator.Send(new LogoutFromAccount.Request());
             DeleteCookie();
             return Ok(logoutResult);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetLoggedInUser()
+        {
+            var data = await _mediator.Send(new LoggedInUserQuery.Request() { });
+            return Ok(data);
         }
 
         private void SetTokenCookie(string token)
@@ -62,7 +69,7 @@ namespace URLStatus.WebAPI.Controllers
                 HttpOnly = true,
                 Secure = true,
                 Expires = DateTime.Now.AddDays(30),
-                SameSite = SameSiteMode.Lax
+                SameSite = SameSiteMode.Lax,
             };
             if (_cookieSettings != null)
             {
@@ -72,9 +79,10 @@ namespace URLStatus.WebAPI.Controllers
                     Expires = cookieOption.Expires,
 
                     Secure = _cookieSettings.Secure,
-                    SameSite = _cookieSettings.SameSite
+                    SameSite = _cookieSettings.SameSite,
                 };
             }
+            Response.Cookies.Append(CookieSettings.CookieName,token,cookieOption);
 
         }
 

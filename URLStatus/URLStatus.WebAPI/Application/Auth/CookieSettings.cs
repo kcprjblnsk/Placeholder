@@ -9,7 +9,7 @@ namespace URLStatus.WebAPI.Application.Auth
     public class CookieSettings
     {
         public const string CookieName = "auth.token";
-        public bool Secure { get; set; }
+        public bool Secure { get; set; } = true;
         public SameSiteMode SameSite = SameSiteMode.Lax;
     }
 }

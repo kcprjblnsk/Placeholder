@@ -27,7 +27,7 @@ namespace URLStatus.Infrastructure.Auth
         {
             if (string.IsNullOrWhiteSpace(_jwtOptions.Secret))
             {
-                throw new ArgumentException("JWT options secret is empty");
+                throw new ArgumentException("JWT options secret is empty!");
             }
 
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtOptions.Secret));
@@ -38,8 +38,9 @@ namespace URLStatus.Infrastructure.Auth
         private string GenerateTokenWithClaims(IEnumerable<Claim> claims)
         {
             var mySecurityKey = GetSecurityKey();
+
             var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenDescriptor = new SecurityTokenDescriptor()
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(_jwtOptions.ExpireInDays),
@@ -47,6 +48,7 @@ namespace URLStatus.Infrastructure.Auth
                 Audience = _jwtOptions.Audience,
                 SigningCredentials = new SigningCredentials(mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
@@ -55,8 +57,9 @@ namespace URLStatus.Infrastructure.Auth
         {
             var claims = new Claim[]
             {
-                new Claim(UserIdClaim, userId.ToString())
+                new Claim(UserIdClaim, userId.ToString()),
             };
+
             return GenerateTokenWithClaims(claims);
         }
 
@@ -95,15 +98,13 @@ namespace URLStatus.Infrastructure.Auth
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
-            if (securityToken != null)
+            if (securityToken == null)
             {
                 return null;
             }
 
-            var stringClaimValue = securityToken.Claims.FirstOrDefault(c => c.Type == claimType)?.Value;
+            var stringClaimValue = securityToken.Claims.FirstOrDefault(claim => claim.Type == claimType)?.Value;
             return stringClaimValue;
-            
-
         }
         //https://jasonwatmore.com/post/2022/01/19/net-6-create-and-validate-jwt-tokens-use-custom-jwt-middleware
 

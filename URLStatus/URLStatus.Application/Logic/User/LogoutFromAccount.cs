@@ -28,7 +28,7 @@ namespace URLStatus.Application.Logic.User
 
         public class Handler : BaseCommandHandler, IRequestHandler<Request, Result>
         {
-            private readonly IPasswordManager _passwordManager;
+            
             public Handler(ICurrentAccountProvider currentAccountProvider, IApplicationDbContext applicationDbContext) : base(currentAccountProvider, applicationDbContext)
             {
                 

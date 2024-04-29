@@ -36,11 +36,11 @@ namespace URLStatus.WebAPI
                     .Enrich.FromLogContext());
 
             // Add services to the container.
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddDatabaseCache();
             builder.Services.AddSqlDatabase(builder.Configuration.GetConnectionString("MainDbSql")!);
             builder.Services.AddControllers();
-            builder.Services.AddDatabaseCache();
             builder.Services.AddJwtAuth(builder.Configuration);
-            builder.Services.AddHttpContextAccessor();
             builder.Services.AddJwtAuthenticationDataProvider(builder.Configuration);
             builder.Services.AddPasswordManager();
             
@@ -51,6 +51,7 @@ namespace URLStatus.WebAPI
             });
 
             builder.Services.AddApplicationCollection();
+            
             
             builder.Services.AddValidators();
 

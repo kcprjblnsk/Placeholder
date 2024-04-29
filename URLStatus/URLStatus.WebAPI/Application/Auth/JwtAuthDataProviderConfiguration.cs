@@ -8,7 +8,7 @@ public static class JwtAuthDataProviderConfiguration
     public static IServiceCollection AddJwtAuthenticationDataProvider(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<CookieSettings>(configuration.GetSection("CookieSettings"));
-        services.AddSingleton<IAuthenticationDataProvider,JwtAuthenticationDataProvider>();
+        services.AddScoped<IAuthenticationDataProvider, JwtAuthenticationDataProvider>();
 
         return services;
     }
