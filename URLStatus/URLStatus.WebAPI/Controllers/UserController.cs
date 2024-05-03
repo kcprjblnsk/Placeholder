@@ -2,6 +2,7 @@ using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.Extensions.Options;
 using URLStatus.Application.Logic.User;
 using URLStatus.Infrastructure.Auth;
@@ -18,17 +19,21 @@ namespace URLStatus.WebAPI.Controllers
     {
         private readonly JwtManager _jwtManager;
         private readonly CookieSettings? _cookieSettings;
+        private readonly IAntiforgery _antiforgery;
 
         public UserController(ILogger<UserController> logger,
             IOptions<CookieSettings> cookieSettings,
             JwtManager jwtManager,
+            IAntiforgery antiforgery,
             IMediator mediator) : base(logger, mediator) //needed generic fixed
         {
+            _antiforgery = antiforgery;
             _cookieSettings = cookieSettings != null ? cookieSettings.Value:null;
             _jwtManager = jwtManager;
         }
 
         [HttpPost]
+        [IgnoreAntiforgeryToken]
         public async Task<ActionResult> CreateUserWithAccount([FromBody] CreateUserWithAccount.Request model)
         {
             var createAccountResult = await _mediator.Send(model);
@@ -61,7 +66,12 @@ namespace URLStatus.WebAPI.Controllers
             var data = await _mediator.Send(new LoggedInUserQuery.Request() { });
             return Ok(data);
         }
-
+        [HttpGet]
+        public async Task<ActionResult> AntiforgeryToken()
+        {
+            var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
+            return Ok(tokens.RequestToken);
+        }
 
         private void SetTokenCookie(string token)
         {

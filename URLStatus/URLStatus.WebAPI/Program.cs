@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using URLStatus.Application;
 using URLStatus.Application.Logic.Abstractions;
@@ -39,7 +40,14 @@ namespace URLStatus.WebAPI
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddDatabaseCache();
             builder.Services.AddSqlDatabase(builder.Configuration.GetConnectionString("MainDbSql")!);
-            builder.Services.AddControllers();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                if (!builder.Environment.IsDevelopment()) //turned off env due to swagger injections
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                }
+            });
+
             builder.Services.AddJwtAuth(builder.Configuration);
             builder.Services.AddJwtAuthenticationDataProvider(builder.Configuration);
             builder.Services.AddPasswordManager();
@@ -69,6 +77,12 @@ namespace URLStatus.WebAPI
                     return name;
                 });
             });
+            builder.Services.AddAntiforgery(
+                o =>
+                {
+                    o.HeaderName = "X-XSRF-TOKEN";
+
+                });
 
             builder.Services.AddCors();
 
