@@ -4,6 +4,9 @@
             <v-app-bar-nav-icon v-if="mobile" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
             <v-app-bar-title>Application</v-app-bar-title>
+            <v-spacer></v-spacer>
+            <VBtn icon="mdi-theme-light-dark" title="Przełącz motyw" @click="toogleTheme"></VBtn>
+
         </v-app-bar>
         <v-navigation-drawer :order="mobile ? -1 : 0" v-model="drawer">
             <VList>
@@ -26,6 +29,13 @@
 
 <script setup>
 import { useDisplay } from 'vuetify'
+import { useTheme } from 'vuetify';
+import { useStorage } from '@vueuse/core';
+
+
+const theme = useTheme();
+const currentTheme = useStorage('currentTheme', 'light');
+
 const { mobile } = useDisplay();
 
 const drawer = ref(null);
@@ -41,5 +51,17 @@ const menuItems = [
         icon: 'mdi-web-check',
         url: '/urls',
     }
-]
+];
+
+function toogleTheme() {
+    let newTheme = theme.global.current.value.dark ? 'light' : 'dark';
+    theme.global.name.value = newTheme;
+    currentTheme.value = newTheme;
+
+}
+onMounted(() => {
+    theme.global.name.value = currentTheme.value;
+});
+
+
 </script>
