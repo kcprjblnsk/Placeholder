@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using URLStatus.Application;
@@ -46,7 +47,8 @@ namespace URLStatus.WebAPI
                 {
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 }
-            });
+            }).AddJsonOptions(options => 
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
             builder.Services.AddJwtAuth(builder.Configuration);
             builder.Services.AddJwtAuthenticationDataProvider(builder.Configuration);
