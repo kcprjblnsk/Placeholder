@@ -6,7 +6,9 @@
             <v-app-bar-title>Application</v-app-bar-title>
             <v-spacer></v-spacer>
             <VBtn icon="mdi-theme-light-dark" title="Przełącz motyw" @click="toogleTheme"></VBtn>
-
+            <v-btn @click="logout" prepend-icon="mdi-logout" v-if="userStore.$state.isLoggedIn === true">
+                Wyloguj
+            </v-btn>
         </v-app-bar>
         <v-navigation-drawer :order="mobile ? -1 : 0" v-model="drawer" v-if="userStore.$state.isLoggedIn === true">
             <v-list-item lines="two">
@@ -75,6 +77,10 @@ function toogleTheme() {
     theme.global.name.value = newTheme;
     currentTheme.value = newTheme;
 
+}
+
+const logout = () => {
+    userStore.logout();
 }
 onMounted(() => {
     theme.global.name.value = currentTheme.value;
