@@ -11,12 +11,15 @@ export const useUserStore = defineStore({
     },
     actions: {
         loadLoggedInUser() {
+            const accountStore = useAccountStore();
+
             this.loading = true;
             useWebApiFetch('/User/GetLoggedInUser') //action from UserController.cs 
                 .then(({ data, error }) => {
                     if (data.value) {
                         this.isLoggedIn = true;
-                        this.userData = data.value; 
+                        this.userData = data.value;
+                        accountStore.loadCurrentAccount(); 
                     } else if (error.value) {
                         this.isLoggedIn = false;
                         this.userData = null;

@@ -7,9 +7,9 @@
             </div>
             <VForm @submit.prevent="submit" :disabled="loading">
                 <VCardText>
-                    <v-text-field class="mb-2" variant="outlined" v-model="viewModel.email" label="Email"
+                    <v-text-field class="mb-4" variant="outlined" v-model="viewModel.email" label="Email"
                         :rules="[ruleEmail, ruleRequired]"></v-text-field>
-                    <v-text-field class="mb-2" variant="outlined" v-model="viewModel.password" type="password"
+                    <v-text-field class="mb-4" variant="outlined" v-model="viewModel.password" type="password"
                         label="Hasło" :rules="[ruleRequired]"> </v-text-field>
                     <VAlert v-if="errorMsg" type="error" variant="tonal">{{ errorMsg }}</VAlert>
 
