@@ -18,6 +18,9 @@
                     <v-btn class="mx-auto" color="primary" type="submit" variant="elevated"
                         .loading="loading">Zaloguj</v-btn>
                 </VCardActions>
+                <VCardText class="text-caption text-center">Nie masz konta? <NuxtLink to="/register">Zarejestruj się
+                    </NuxtLink>
+                </VCardText>
             </VForm>
         </VCard>
     </VDialog>
