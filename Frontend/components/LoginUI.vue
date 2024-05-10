@@ -27,6 +27,8 @@
 
 <script setup>
 const userStore = useUserStore();
+const { getErrorMessage } = useWebApiResponseParser();
+
 const show = computed(() => {
     return userStore.$state.isLoggedIn === false || userStore.$state.loading === true;
 });
@@ -52,7 +54,7 @@ const login = () => {
         method: 'POST',
         body: { ...viewModel.value },
         onResponseError: ({ response }) => {
-            errorMsg.value = "Błąd logowania";
+            errorMsg.value = getErrorMessage(response, { "InvalidLoginOrPassword": "Błędny login lub hasło" });
         }
     })
         .then((response) => {
