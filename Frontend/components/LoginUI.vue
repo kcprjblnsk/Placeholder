@@ -1,7 +1,10 @@
 <template>
-    <VDialog v-model="show" persistent width="400" scroll-strategy="none">
+    <VDialog :model-value="show" persistent width="400" scroll-strategy="none">
         <VCard class="py-4">
             <VCardTitle class="text-center">Logowanie</VCardTitle>
+            <div v-if="userStore.$state.loading === true" class="pa-4 d-flex justify-center">
+                <VProgressCircular indeterminate></VProgressCircular>
+            </div>
             <VForm @submit.prevent="submit">
                 <VCardText>
                     <v-text-field class="mb-2" variant="outlined" v-model="viewModel.email"
@@ -20,7 +23,10 @@
 <style lang="scss" scoped></style>
 
 <script setup>
-const show = ref(true);
+const userStore = useUserStore();
+const show = computed(() => {
+    return userStore.$state.isLoggedIn === false || userStore.$state.loading === true;
+});
 
 const viewModel = ref({
     email: '',

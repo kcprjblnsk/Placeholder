@@ -8,7 +8,7 @@
             <VBtn icon="mdi-theme-light-dark" title="Przełącz motyw" @click="toogleTheme"></VBtn>
 
         </v-app-bar>
-        <v-navigation-drawer :order="mobile ? -1 : 0" v-model="drawer">
+        <v-navigation-drawer :order="mobile ? -1 : 0" v-model="drawer" v-if="userStore.$state.isLoggedIn === true">
             <VList>
                 <VListItem v-for="item in menuItems" :key="item.name" :title="item.name" :prepend-icon="item.icon"
                     :to="item.url">
@@ -20,7 +20,7 @@
 
         <v-main>
             <div class="pa-4">
-                <NuxtPage />
+                <NuxtPage v-if="userStore.$state.isLoggedIn === true" />
             </div>
 
         </v-main>
