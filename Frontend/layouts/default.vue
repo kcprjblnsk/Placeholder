@@ -37,7 +37,7 @@ const theme = useTheme();
 const currentTheme = useStorage('currentTheme', 'light');
 
 const { mobile } = useDisplay();
-
+const userStore = useUserStore();
 const drawer = ref(null);
 
 const menuItems = [
@@ -61,6 +61,7 @@ function toogleTheme() {
 }
 onMounted(() => {
     theme.global.name.value = currentTheme.value;
+    userStore.loadLoggedInUser();
 });
 
 
