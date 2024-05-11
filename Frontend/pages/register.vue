@@ -27,6 +27,9 @@ definePageMeta({
     layout: "no-auth",
 });
 
+
+var globalMessageStore = useGlobalMessageStore();
+
 const viewModel = ref({
     email: '',
     password: ''
@@ -66,6 +69,7 @@ const register = () => {
     })
         .then((response) => {
             if (response.data.value) {
+                globalMessageStore.showSuccessMessage('Twoje konto zostało utworzone. Zalogowano do aplikacji.');
                 router.push({ path: '/' });
             }
         })
