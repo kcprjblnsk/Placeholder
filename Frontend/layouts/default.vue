@@ -42,6 +42,7 @@
 
         </v-main>
         <LoginUI></LoginUI>
+        <ConfirmDialog ref="confirmDialog" />
     </v-app>
 </template>
 
@@ -57,7 +58,7 @@ const drawer = ref(null);
 const currentTheme = useStorage('currentTheme', 'light');
 const userStore = useUserStore();
 const accountStore = useAccountStore();
-
+const confirmDialog = ref(null);
 
 const menuItems = [
     {
@@ -80,7 +81,16 @@ function toogleTheme() {
 }
 
 const logout = () => {
-    userStore.logout();
+    confirmDialog.value.show({
+        title: 'Potwierdź wylogowanie',
+        text: 'Czy na pewno chcesz się wylogować?',
+        confirmBtnText: 'Wyloguj',
+        confirmBtnColor: 'error'
+    }).then((confirm) => {
+        if (confirm) {
+            userStore.logout();
+        }
+    })
 }
 onMounted(() => {
     theme.global.name.value = currentTheme.value;
