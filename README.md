@@ -4,7 +4,7 @@ This repository contains a .NET WebAPI project built using Clean Architecture pr
 
 ## Project Structure
 - **Domain:** Contains the core domain logic and business rules.
-- **Application:** Implements application logic and orchestrates interactions between different layers.
+- **Application:** Implements application logic and interactions between different layers.
 - **Infrastructure:** Houses infrastructure concerns such as data access, external services integration, etc.
 - **WebAPI 8.0:** Serves as the startup project for the API.
 
