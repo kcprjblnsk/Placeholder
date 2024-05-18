@@ -1,6 +1,13 @@
 # URLStatus IN PROGRESS
 
 This repository contains a .NET WebAPI project built using Clean Architecture principles in ASP.NET. The project structure includes separate layers for Domain, Application, Infrastructure, and WebAPI. 
+## YouTube Video Demo
+[Link to YouTube video demonstration](https://www.youtube.com/watch?v=VY9EDWgiCeA)  <!-- Replace "#" with the actual YouTube link -->
+
+## Photos
+![Screenshot 1](Photos/screenshot1.png)
+![Screenshot 2](Photos/screenshot2.png)
+
 
 ## Project Structure
 - **Domain:** Contains the core domain logic and business rules.
@@ -47,12 +54,7 @@ An easy-to-use website is provided to test the current backend and database abil
 - Nuxt.js
 - Node.js
 
-## YouTube Video Demo
-[Link to YouTube video demonstration](https://www.youtube.com/watch?v=VY9EDWgiCeA)  <!-- Replace "#" with the actual YouTube link -->
 
-## Photos
-![Screenshot 1](Photos/screenshot1.png)
-![Screenshot 2](Photos/screenshot2.png)
 
 
 
