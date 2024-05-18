@@ -34,6 +34,7 @@ The current version of the project allows users to perform the following actions
 - JWT Token authentication
 - Cross-Origin Resource Sharing (CORS) for enhanced project security
 - AntiForgeryToken implementation for project security
+- MANY Validators ensuring everything is secured and correct
 
 ## Database Structure
 The database, created in MSSQL, contains the following tables:
