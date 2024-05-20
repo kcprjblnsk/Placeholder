@@ -39,6 +39,11 @@ This repository contains a .NET WebAPI project built using Clean Architecture pr
   - 🛠️ Numerous validators ensuring security and correctness
 - **Performance:**
   - 💾 Database caching
+  - 🌗 Theme Switch (Dark/Light)
+- **🔗 URL Management:**
+  - ➕ Create a URL
+  - ✏️ Edit a URL
+  - ❌ Delete a URL
 
 ## 🗃️ Database Structure
 - **Tables:**
