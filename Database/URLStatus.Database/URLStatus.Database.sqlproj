@@ -63,5 +63,7 @@
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\Accounts.sql" />
     <Build Include="dbo\Tables\AccountUsers.sql" />
+    <Build Include="dbo\Tables\MonitoredUrls.sql" />
+    <Build Include="dbo\Tables\Results.sql" />
   </ItemGroup>
 </Project>
