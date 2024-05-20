@@ -3,11 +3,12 @@
 This repository contains a .NET WebAPI project built using Clean Architecture principles in ASP.NET. The project structure includes separate layers for Domain, Application, Infrastructure, and WebAPI.
 
 ## 📺 YouTube Video Demo
-[Watch the demo on YouTube](https://www.youtube.com/watch?v=VY9EDWgiCeA)
+[Watch the demo on YouTube](https://www.youtube.com/watch?v=p1Rij1dHZ44)
 
 ## 📸 Photos
 ![Screenshot 1](Photos/screenshot1.png)
 ![Screenshot 2](Photos/screenshot2.png)
+![Screenshot 3](Photos/screenshot3.png)
 
 ## 🏗️ Project Structure
 - **🗂️ Domain:** Core domain logic and business rules.
@@ -38,6 +39,11 @@ This repository contains a .NET WebAPI project built using Clean Architecture pr
   - 🛠️ Numerous validators ensuring security and correctness
 - **Performance:**
   - 💾 Database caching
+  - 🌗 Theme Switch (Dark/Light)
+- **🔗 URL Management:**
+  - ➕ Create a URL
+  - ✏️ Edit a URL
+  - ❌ Delete a URL
 
 ## 🗃️ Database Structure
 - **Tables:**

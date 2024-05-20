@@ -7,7 +7,7 @@
 
             <template v-slot:append>
                 <div class="ml-2">
-                    <v-btn color="primary" variant="flat" prepend-icon="mdi-plus">Dodaj</v-btn>
+                    <v-btn color="primary" variant="flat" prepend-icon="mdi-plus" to="/urls/add">Dodaj</v-btn>
                 </div>
             </template>
         </v-toolbar>
@@ -28,7 +28,7 @@
             <template v-slot:item.action="{ item }">
                 <div class="text-no-wrap">
                     <VBtn icon="mdi-delete" title="Usuń" variant="flat"></VBtn>
-                    <VBtn icon="mdi-pencil" title="Edytuj" variant="flat"></VBtn>
+                    <VBtn icon="mdi-pencil" title="Edytuj" variant="flat" :to="`/urls/${item.id}`"></VBtn>
                 </div>
             </template>
         </v-data-table>
@@ -63,6 +63,7 @@ const loadData = () => {
             loading.value = false;
         });
 };
+
 
 onMounted(() => {
     loadData();
