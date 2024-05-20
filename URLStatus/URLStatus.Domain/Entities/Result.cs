@@ -9,7 +9,7 @@ namespace URLStatus.Domain.Entities
 {
     public class Result : DomainEntity
     {
-        public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
 
         public int MonitoredUrlId { get; set; }
         public MonitoredUrl Url { get; set; }

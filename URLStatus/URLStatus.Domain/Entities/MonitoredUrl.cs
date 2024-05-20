@@ -16,6 +16,6 @@ namespace URLStatus.Domain.Entities
         public string Url { get; set; } = "";
 
         public ResultRuleSet RuleSet { get; set; } = new ResultRuleSet();
-        public List<Result> Result { get; set; } = new List<Result>();
+        public List<Result> Results { get; set; } = new List<Result>();
     }
 }
