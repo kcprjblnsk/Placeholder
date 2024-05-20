@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using URLStatus.Application.Exceptions;
 using URLStatus.Application.Interfaces;
 using URLStatus.Application.Logic.Abstractions;
+using URLStatus.Application.Validators;
 using URLStatus.Domain.Entities;
 
 namespace URLStatus.Application.Logic.MonitoredUrl
@@ -71,6 +72,18 @@ namespace URLStatus.Application.Logic.MonitoredUrl
                 {
                     Id = model.Id
                 };
+            }
+        }
+
+        public class Validator : AbstractValidator<Request>
+        {
+            public Validator()
+            {
+                RuleFor(x => x.Url).NotEmpty();
+                RuleFor(x => x.Url).MaximumLength(400);
+                RuleFor(x => x.Url).MustBeUrl();
+
+                RuleForEach(x => x.RuleSet.Rules).SetValidator(new ResultRuleValidator());
             }
         }
 
