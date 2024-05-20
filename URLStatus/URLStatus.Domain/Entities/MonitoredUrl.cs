@@ -7,7 +7,7 @@ using URLStatus.Domain.Common;
 
 namespace URLStatus.Domain.Entities
 {
-    public class MonitorURL : DomainEntity
+    public class MonitoredUrl : DomainEntity
     {
         public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
         public int AccountId { get; set; }

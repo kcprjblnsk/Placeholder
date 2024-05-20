@@ -19,6 +19,8 @@ namespace URLStatus.Infrastructure.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AccountUser> AccountUsers { get; set; }
+        public DbSet<MonitoredUrl> MonitoredUrls { get; set; }
+        public DbSet<Result> Results { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

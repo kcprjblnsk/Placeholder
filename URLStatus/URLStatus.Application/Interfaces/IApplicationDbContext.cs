@@ -13,6 +13,9 @@ namespace URLStatus.Application.Interfaces
         DbSet<User> Users { get; set; }
         DbSet<Account> Accounts { get; set; }
         DbSet<AccountUser> AccountUsers { get; set; }
+        DbSet<MonitoredUrl> MonitoredUrls { get; set; }
+        DbSet<Result> Results { get; set; }
+
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         
