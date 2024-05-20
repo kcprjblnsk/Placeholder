@@ -8,6 +8,7 @@ This repository contains a .NET WebAPI project built using Clean Architecture pr
 ## 📸 Photos
 ![Screenshot 1](Photos/screenshot1.png)
 ![Screenshot 2](Photos/screenshot2.png)
+![Screenshot 3](Photos/screenshot3.png)
 
 ## 🏗️ Project Structure
 - **🗂️ Domain:** Core domain logic and business rules.
