@@ -16,12 +16,14 @@
                 <VTextField :rules="[ruleRequired, ruleUrl, ruleMaxLen(400)]" v-model="viewModel.url" variant="outlined"
                     label="Adres url">
                 </VTextField>
+                <UrlsRuleSet class="mt-2" v-model="viewModel.ruleSet" :disabled="saving"></UrlsRuleSet>
             </VCardText>
 
             <VCardText class="text-right">
                 <VBtn prepend-icon="mdi-content-save" variant="flat" color="primary" type="submit" :loading="saving"
                     :disabled="loading">Zapisz
                 </VBtn>
+
             </VCardText>
         </VForm>
     </VCard>
