@@ -27,15 +27,21 @@
 
             <template v-slot:item.action="{ item }">
                 <div class="text-no-wrap">
-                    <VBtn icon="mdi-delete" title="Usuń" variant="flat"></VBtn>
+                    <VBtn icon="mdi-delete" title="Usuń" variant="flat" :loading="item.deleting"
+                        @click="deleteUrl(item)"></VBtn>
                     <VBtn icon="mdi-pencil" title="Edytuj" variant="flat" :to="`/urls/${item.id}`"></VBtn>
                 </div>
             </template>
         </v-data-table>
+        <ConfirmDialog ref="confirmDialog" />
     </VCard>
+
 </template>
 
 <script setup>
+const confirmDialog = ref(null);
+const globalMessageStore = useGlobalMessageStore();
+const { getErrorMessage } = useWebApiResponseParser();
 const dayjs = useDayjs();
 
 const loading = ref(false);
@@ -64,6 +70,39 @@ const loadData = () => {
         });
 };
 
+const deleteUrl = (item) => {
+    confirmDialog.value.show({
+        title: 'Potwierdź usunięcie',
+        text: 'Czy na pewno chcesz usunąć adres z monitorowania?',
+        confirmBtnText: 'Usuń',
+        confirmBtnColor: 'error'
+    }).then((confirm) => {
+        if (confirm) {
+            item.deleting = true;
+            useWebApiFetch('/MonitoredUrl/Delete', {
+                method: 'POST',
+                body: { id: item.id },
+                watch: false,
+                onResponseError: ({ response }) => {
+                    let message = getErrorMessage(response, {});
+                    globalMessageStore.showErrorMessage(message);
+                }
+            })
+                .then((response) => {
+                    if (response.data.value) {
+                        globalMessageStore.showSuccessMessage('Url został usunięty.');
+                        let indexToDel = items.value.findIndex(i => i.id === item.id);
+                        if (indexToDel > -1) {
+                            items.value.splice(indexToDel, 1);
+                        }
+                    }
+                })
+                .finally(() => {
+                    item.deleting = false;
+                });
+        }
+    })
+}
 
 onMounted(() => {
     loadData();
