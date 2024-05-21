@@ -9,10 +9,10 @@
                         item-value="value"></v-select>
                 </v-col>
                 <v-col cols="12" sm="6">
-                    <v-select :rules="[ruleRequired]" variant="outlined" label="Operator"
-                        :modelValue="props.modelValue.operator"
-                        @update:modelValue="updateModelValue('operator', $event)" :items="operators" item-title="name"
-                        item-value="value"></v-select>
+                    <UrlsRuleOperator :modelValue="props.modelValue.operator"
+                        @update:modelValue="updateModelValue('operator', $event)"
+                        :rule-property="props.modelValue.property"></UrlsRuleOperator>
+
                 </v-col>
                 <v-col cols="12">
                     <v-text-field :rules="[ruleRequired, ruleMaxLen(1000)]" variant="outlined" label="Wartość"
