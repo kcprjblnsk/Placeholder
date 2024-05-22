@@ -18,6 +18,7 @@ namespace URLStatus.Application
         public static IServiceCollection AddApplicationCollection(this IServiceCollection services)
         {
             services.AddScoped<ICurrentAccountProvider, CurrentAccountProvider>();
+            services.AddScoped<MonitoredUrlChecker>();
             return services;
         }
 
